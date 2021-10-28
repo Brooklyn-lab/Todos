@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "title": "Todo 1",
+      "checked": true,
+      "id": 1
+    },
+    {
+      "title": "Todo 2",
+      "checked": false,
+      "id": 2
+    },
+    {
+      "title": "Todo 3",
+      "checked": false,
+      "id": 3
+    },
+    {
+      "title": "Todo 4",
+      "checked": false,
+      "id": 4
+    },
+    {
+      "title": "Todo 5",
+      "checked": true,
+      "id": 5
+    }
+  ]
+}

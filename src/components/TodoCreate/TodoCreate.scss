@@ -1,0 +1,36 @@
+.todo-create {
+   margin-bottom: 25px;
+   position: relative;
+   display: flex;
+   max-width: 300px;
+   width: 100%;
+   justify-content: space-between;
+   align-items: center;
+   border-radius: 10px;
+   background: #b5b4b4;
+   padding: 15px;
+
+   &__input {
+      border: 1px solid tomato;
+      padding: 6px 10px;
+      margin-right: 10px;
+   }
+
+   &__error {
+      display: none;
+      position: absolute;
+      bottom: -15px;
+      font-size: 12px;
+      line-height: 12px;
+      left: 0;
+      color: tomato;
+
+      &.show {
+         display: block;
+      }
+   }
+
+   &__button {
+      cursor: pointer;
+   }
+}

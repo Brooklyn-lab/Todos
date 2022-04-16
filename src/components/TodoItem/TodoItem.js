@@ -1,16 +1,53 @@
+import React, { useReducer } from "react";
 import "./TodoItem.scss";
 import { API } from "../../utils/api";
-import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button } from "@mui/material";
 
+function init(state) {
+  return { ...state };
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "isEdit":
+      return {
+        ...state,
+        isEdit: !state.isEdit,
+      };
+    case "title":
+      return {
+        ...state,
+        title: action.payload,
+      };
+    case "checked":
+      return {
+        ...state,
+        checked: !state.checked,
+      };
+    case "disabled":
+      return {
+        ...state,
+        disabled: !state.disabled,
+      };
+    default:
+      return state;
+  }
+}
+
 const TodoItem = ({ todo, setTodos }) => {
-  const [isEdit, setEdit] = useState(false);
-  const [title, setTitle] = useState(todo.title);
-  const [checked, setChecked] = useState(todo.checked);
-  const [disabled, setDisabled] = useState(false);
+  const [data, dispatch] = useReducer(
+    reducer,
+    {
+      isEdit: false,
+      title: todo.title,
+      checked: todo.checked,
+      disabled: false,
+    },
+    init
+  );
 
   async function editHelper(id, keyToChange, value) {
     try {
@@ -22,18 +59,18 @@ const TodoItem = ({ todo, setTodos }) => {
   }
 
   async function editChecked(id) {
-    setChecked(!checked);
-    editHelper(id, "checked", checked);
+    dispatch({ type: "checked" });
+    editHelper(id, "checked", data.checked);
   }
 
   async function editTodo(id) {
-    setEdit(!isEdit);
-    setDisabled(!disabled);
-    isEdit && editHelper(id, "title", title);
+    dispatch({ type: "isEdit" });
+    dispatch({ type: "disabled" });
+    data.isEdit && editHelper(id, "title", data.title);
   }
 
   function editTitle(e) {
-    setTitle(e.target.value);
+    dispatch({ type: "title", payload: e.target.value });
   }
 
   async function deleteTodo(id) {
@@ -53,20 +90,20 @@ const TodoItem = ({ todo, setTodos }) => {
           className="todo__checkbox"
           id={todo.id}
           type="checkbox"
-          defaultChecked={!checked}
-          value={checked}
+          defaultChecked={!data.checked}
+          value={data.checked}
           onChange={() => editChecked(todo.id)}
-          disabled={disabled}
+          disabled={data.disabled}
         />
         <label htmlFor={todo.id} className="todo__label-checkbox" />
-        {isEdit ? (
-          <input className="todo__input" type="text" value={title} onChange={editTitle} />
+        {data.isEdit ? (
+          <input className="todo__input" type="text" value={data.title} onChange={editTitle} />
         ) : (
-          <span className={checked ? "todo__title" : "todo__title-done"}>{title}</span>
+          <span className={data.checked ? "todo__title" : "todo__title-done"}>{data.title}</span>
         )}
       </label>
       <div className="todo__buttons">
-        {isEdit ? (
+        {data.isEdit ? (
           <Button color="inherit" variant="text" onClick={() => editTodo(todo.id)}>
             Save
           </Button>
@@ -86,4 +123,4 @@ const TodoItem = ({ todo, setTodos }) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);

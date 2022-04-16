@@ -1,13 +1,15 @@
 import { Button } from "@mui/material";
 import { ROUTES } from "../../infastructure/constants";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Theme from "../../components/Theme/Theme";
 import TodoCreate from "../../components/TodoCreate/TodoCreate";
 import TodosList from "../../components/TodosList/TodosList";
 import { API } from "../../utils/api";
+import ThemeContext from "../../context";
 
-const TodoWrapper = ({ theme, setTheme }) => {
+const TodoWrapper = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
 

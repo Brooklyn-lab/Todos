@@ -1,19 +1,9 @@
 {
   "posts": [
     {
-      "title": "Todo 1",
+      "title": "Купить молоко",
       "checked": true,
-      "id": 1
-    },
-    {
-      "title": "Todo 2",
-      "checked": false,
       "id": 2
-    },
-    {
-      "title": "Todo 3",
-      "checked": false,
-      "id": 3
     },
     {
       "title": "Todo 4",
@@ -21,9 +11,19 @@
       "id": 4
     },
     {
-      "title": "Todo 5",
+      "title": "купить что-то",
       "checked": true,
-      "id": 5
+      "id": 7
+    },
+    {
+      "title": "Todo 25",
+      "checked": true,
+      "id": 9
+    },
+    {
+      "title": "Todo 35",
+      "checked": true,
+      "id": 11
     }
   ]
 }

@@ -1,6 +1,10 @@
 import "./Theme.scss";
+import { useContext } from "react";
+import ThemeContext from "../../context";
 
-const Theme = ({ theme, setTheme }) => {
+const Theme = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
   function toggleTheme() {
     setTheme(!theme);
   }
